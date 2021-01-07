@@ -1,17 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default class Index extends React.Component {
+class IndexComponent extends React.Component {
     constructor(props) {
       super(props);
-      const url = process.env.API_URL || 'http://localhost:3000';
-      fetch(url + '/api/companies')
-      .then(res => res.json())
-      .then(c => {
-        const companies =  (c || []);
-        this.setState({ companies, filtered: companies });
-      }).catch(console.error);
-      this.state = { companies: [], filtered: [] };
+      this.state = { 
+        companies: [], 
+        filtered: [] 
+      };
+      fetch('api/companies')
+      .then(res => res.json()).then(companies => {
+        const c = companies || [];
+          this.setState({ companies: c, filtered: c });
+      });
     }
 
     onSearchInput(event) {
@@ -24,7 +25,7 @@ export default class Index extends React.Component {
       return <>
            <div className="container mx-auto px-4">
           <h1 className="text-center text-5xl capitalize p-5">
-            Real ... 
+            Interview Questions
           </h1>
           <div className="search-wrapper">
             <input id="search" 
@@ -55,3 +56,7 @@ export default class Index extends React.Component {
     }
 
 }
+
+export default function Index() {
+  return <IndexComponent/>;
+} 

@@ -6,8 +6,7 @@ class InterviewComponent extends React.Component {
         super(props);
         this.state = { company: null };
         const name = this.props.company;
-        const url = process.env.API_URL || 'http://localhost:3000';
-        fetch(url + '/api/companies')
+        fetch('api/companies')
         .then(res => res.json()).then(companies => {
             this.setState({ company: companies.find(c => c.name === name) });
         });
@@ -18,19 +17,26 @@ class InterviewComponent extends React.Component {
         return <>
             
             <h1 className="text-center text-5xl capitalize p-5">
-                Interview with { this.state.company ? this.state.company.name : '' } 
-            </h1>
-            <div className='flex flex-col items-center py-6'>
                 
+                { this.state.company ? this.state.company.name : '' } 
+            </h1>
+            <div className="text-2xl italic opacity-40 text-center capitalize p-5">
+                 interview path
+            </div> 
+            <div className='flex flex-col items-center py-6'>
+ 
+            <div className='container max-w-lg'>
                 { this.state.company ? this.state.company.interview.map( (i, key) => {
-                    return <div className='m-3 p-3 border container max-w-lg' key={key}>
+                    return <div className='m-3 p-3 border' key={key}>
                         <h2 className='uppercase'>{i.stage}</h2>
                         <ul>
                         { i.questions.map((q, k) => <li className='my-1 p-1' key={k}>{q}</li>) }
                         </ul>
-                   
+                    
                     </div>
                 } ): '' }   
+            </div>
+     
             </div>
         </>
     }
@@ -39,5 +45,5 @@ class InterviewComponent extends React.Component {
 export default function Interview() {
     const router = useRouter()
     const { company } = router.query;
-    return <InterviewComponent company={company}/>;
+    return  <InterviewComponent company={company}/>;
 }
