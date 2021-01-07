@@ -36,15 +36,15 @@ export default class Index extends React.Component {
             <ul>
               { this.state.filtered.map((c, i) => (
                   <li key={i} className='flex items-center p-3'>        
-                    <Link href={c.site}>
-                    <a className="mr-4 capitalize cursor-pointer" target="_blank">
+                    <Link href={'/interview?company=' + c.name }>
+                    <span className="mr-4 capitalize cursor-pointer">
                       { c.name }
-                    </a>
+                    </span>
                     </Link>
                     <img 
                         className="w-4 h-4 mr-3"
                         src={c.icon} 
-                        onError={ (event) => event.target.style.display='none' } />
+                        onError={ (event) => (event.target.style.display='none') } />
                   </li>
               ))  }
             </ul>
