@@ -4,7 +4,8 @@ import Link from 'next/link';
 export default class Index extends React.Component {
     constructor(props) {
       super(props);
-      fetch('http://localhost:3000/api/companies')
+      const url = process.env.HOST || 'http://localhost:3000';
+      fetch(url + '/api/companies')
       .then(res => res.json())
       .then(c => {
         const companies =  (c || []);

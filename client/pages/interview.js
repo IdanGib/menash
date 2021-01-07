@@ -6,7 +6,8 @@ class InterviewComponent extends React.Component {
         super(props);
         this.state = { company: null };
         const name = this.props.company;
-        fetch('http://localhost:3000/api/companies')
+        const url = process.env.HOST || 'http://localhost:3000';
+        fetch(url + '/api/companies')
         .then(res => res.json()).then(companies => {
             this.setState({ company: companies.find(c => c.name === name) });
         });
