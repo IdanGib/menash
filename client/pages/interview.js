@@ -14,10 +14,9 @@ class InterviewComponent extends React.Component {
 
     render() {
         
-        return <>
+        return  <>
             
-            <h1 className="text-center text-5xl capitalize p-5">
-                
+            <h1 className="text-center text-5xl capitalize p-5">       
                 { this.state.company ? this.state.company.name : '' } 
             </h1>
             <div className="text-2xl italic opacity-40 text-center capitalize p-5">
@@ -45,5 +44,5 @@ class InterviewComponent extends React.Component {
 export default function Interview() {
     const router = useRouter()
     const { company } = router.query;
-    return  <InterviewComponent company={company}/>;
+    return  company ? <InterviewComponent company={company}/> : <><div></div></>;
 }
