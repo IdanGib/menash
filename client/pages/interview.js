@@ -9,7 +9,7 @@ class InterviewComponent extends React.Component {
         fetch('api/companies')
         .then(res => res.json()).then(companies => {
             this.setState({ company: companies.find(c => c.name === name) });
-        });
+        }).catch(err => {});
      }
 
     render() {
